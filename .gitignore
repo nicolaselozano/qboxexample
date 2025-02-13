@@ -128,3 +128,32 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+
+# Archivos de compilación
+*.class
+
+# Directorios generados por herramientas de construcción
+/bin/
+/build/
+/target/
+
+# Archivos de configuración del IDE
+/.idea/
+/*.iml
+/.vscode/
+/out/
+
+# Dependencias descargadas por Maven o Gradle
+/.mvn/
+/.mvn/wrapper/maven-wrapper.jar
+/.gradle/
+/.gradle/
+/build/
+
+# Archivos de logs
+*.log
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
