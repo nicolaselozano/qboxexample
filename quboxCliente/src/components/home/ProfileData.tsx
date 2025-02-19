@@ -12,7 +12,7 @@ const Title: React.FC = () => {
   };
 
   const handleScroll = () => {
-    const section = document.getElementById("follow");
+    const section = document.getElementById("aboutUs");
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
     }
@@ -27,19 +27,19 @@ const Title: React.FC = () => {
 
   return (
     <div className="relative flex flex-col md:flex-row justify-center md:justify-between items-center md:items-start w-full p-4 md:p-10">
-      {/* Texto y botones */}
-      <div className="text-center mt-[15vh] md:text-left h-[50vh] md:h-[60vh] mb-6 md:mb-0">
+      
+      <div className="text-center mt-[15vh] md:text-left h-[50vh] md:h-[60vh] md:mb-0">
         <Typewriter
           sentences={["Acompañamiento profesional", "Mejora tus habitos"]}
         />
-        <p className="text-base font-[Noto_Serif] md:text-lg lg:text-[10vh] mt-4">
+        <p className="text-base font-[Noto_Serif] font-extrabold md:text-lg lg:text-[9vh]">
           Haz una inversion en Ti
         </p>
-
-        <div className="flex justify-center md:justify-start mt-6">
+        <h3 className="text-[3.2vh]">Entrena para vos, entrena para la vida.</h3>
+        <div className="flex justify-center md:justify-start mt-16">
           <ButtonHome classname="border-black w-[20vh] md:w-[25vh] shadow-purple-glow">
             <a onClick={handleScroll}>
-              <span>Mas info</span>
+              <span>Sobre nosotros</span>
             </a>
           </ButtonHome>
           <ButtonHome classname="border-qbox w-[20vh] md:w-[25vh] ml-4 shadow-purple-glow">

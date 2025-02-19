@@ -1,20 +1,15 @@
 package com.qbox.googleSheet.config;
 
-import com.qbox.googleSheet.filter.JwtAuthenticationFilter;
-import com.qbox.googleSheet.service.CustomUserDetailsService;
-import com.qbox.googleSheet.service.OAuth2LoginSuccessHandler;
+import com.qbox.googleSheet.filter.auth.JwtAuthenticationFilter;
 import com.qbox.googleSheet.utils.AESUtil;
 import com.qbox.googleSheet.utils.CreateCookie;
 import com.qbox.googleSheet.utils.JwtTokenUtil;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,14 +17,10 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -68,8 +59,8 @@ public class SecurityConfig {
                                 "/oauth2/**",
                                 "/auth/register",
                                 "/auth/login",
-                                "/swagger-ui/**",
-                                "/api/**"
+                                "/api/**",
+                                "/ws-update"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
@@ -83,6 +74,8 @@ public class SecurityConfig {
 
         return http.build();
     }
+
+
     private void handleOAuth2Success(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         try {
             System.out.println("✅ OAuth2 Success Handler triggered!");
@@ -115,7 +108,6 @@ public class SecurityConfig {
             response.sendRedirect("/oauth2/success?token=" + encryptedToken);
 
         } catch (Exception e) {
-            e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Authentication failed: " + e.getMessage());
         }
     }

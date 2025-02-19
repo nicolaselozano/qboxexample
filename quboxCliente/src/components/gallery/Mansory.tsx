@@ -5,8 +5,7 @@ export const MansoryGallery = ({ tailcards }) => {
       return <p className="text-center text-gray-500">No cards available.</p>;
     }
   
-    // Agrupamos las imágenes en columnas para lograr el efecto Masonry
-    const columns = [[], [], [], []]; // 4 columnas para distribución
+    const columns = [[], [], [], []];
   
     tailcards.forEach((card, index) => {
       columns[index % 4].push(card);

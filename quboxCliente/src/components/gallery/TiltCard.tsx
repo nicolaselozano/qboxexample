@@ -25,8 +25,8 @@ export const TiltEffect = ({ className, image, children }) => {
       const y = e.clientY - box.top;
       const centerX = box.width / 2;
       const centerY = box.height / 2;
-      const rotateX = (y - centerY) / 20;
-      const rotateY = (centerX - x) / 20;
+      const rotateX = (y - centerY) / 5;
+      const rotateY = (centerX - x) / 5;
 
       setRotate({ x: rotateX, y: rotateY });
     }, 100),

@@ -3,7 +3,6 @@ package com.qbox.googleSheet.utils;
 import com.qbox.googleSheet.config.AppConfig;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -34,10 +33,13 @@ public class JwtTokenUtil {
                 .signWith(getSigningKey())
                 .compact();
     }
-    public String extractUsername(String token) {
+    public String extractEmail(String token) {
         return Jwts.parser().verifyWith(getSigningKey()).build().parseSignedClaims(token).getPayload().getSubject();
     }
 
+    public String extractStringClaim(String token, String key){
+        return (String) Jwts.parser().verifyWith(getSigningKey()).build().parseSignedClaims(token).getPayload().get(key);
+    }
     public boolean validateToken(String token) {
         try {
             Jwts.parser().verifyWith(getSigningKey()).build().parseSignedClaims(token);

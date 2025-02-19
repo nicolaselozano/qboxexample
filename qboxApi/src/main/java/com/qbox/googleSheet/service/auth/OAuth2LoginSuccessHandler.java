@@ -1,4 +1,4 @@
-package com.qbox.googleSheet.service;
+package com.qbox.googleSheet.service.auth;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

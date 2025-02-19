@@ -1,10 +1,13 @@
 import "./App.css";
+import { AboutUs } from "./components/aboutUs/AboutUs";
 import { BackgroundBox } from "./components/background/BackgroundBox";
 import { CarruselLanding } from "./components/carrusel/Carrusel";
 import { MansoryGallery } from "./components/gallery/Mansory";
 import { TiltEffect } from "./components/gallery/TiltCard";
 import Title from "./components/home/ProfileData";
+import { Titles } from "./components/home/Titles";
 import Navbar from "./components/navbar/Navbar";
+import { ProgramsOptions } from "./components/programsOptions/ProgramsOptions";
 
 function App() {
   const tailcards = [
@@ -70,26 +73,40 @@ function App() {
   ];
 
   return (
-    <>
-      <BackgroundBox />
-      <Navbar />
-      <Title />
-      <CarruselLanding />
-
-      {console.log("Rendering MansoryGallery with tailcards:", tailcards)}
-
-      <MansoryGallery
-        tailcards={tailcards.map((card, index) => (
-          <TiltEffect image={card.image} key={index} className="w-full h-auto">
-            <img
-              src={card.image}
-              alt={card.title}
-              className="h-auto max-w-full rounded-lg object-cover"
-            />
-          </TiltEffect>
-        ))}
-      />
-    </>
+    <section className="flex flex-col justify-between">
+      <div>
+        <BackgroundBox />
+        <Navbar />
+        <Title />
+        <Titles/>
+      </div>
+      <div className="mt-[20vh]">
+        <AboutUs/>
+      </div>
+      <div className="mt-[20vh] w-full flex flex-col justify-center items-center">
+      <h1 className="text-[7vh] font-bold text-qbox">Lo que ofrecemos</h1>
+      <p className="text-[3vh]">Elije el programa que mas se adapte a tu objetivo</p>
+        <ProgramsOptions/>
+      </div>
+      <div className="w-[150vh] mx-auto flex flex-col justify-center items-center">
+      <h3 className="text-[#ff4200] text-lg font-bold uppercase mb-10">Galeria</h3>
+        <MansoryGallery
+          tailcards={tailcards.map((card, index) => (
+            <TiltEffect
+              image={card.image}
+              key={index}
+              className="w-full h-auto"
+            >
+              <img
+                src={card.image}
+                alt={card.title}
+                className="h-auto max-w-full rounded-lg object-cover"
+              />
+            </TiltEffect>
+          ))}
+        />
+      </div>
+    </section>
   );
 }
 

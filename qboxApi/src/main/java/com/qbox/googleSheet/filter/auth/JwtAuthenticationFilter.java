@@ -1,4 +1,4 @@
-package com.qbox.googleSheet.filter;
+package com.qbox.googleSheet.filter.auth;
 
 import com.qbox.googleSheet.utils.AESUtil;
 import com.qbox.googleSheet.utils.JwtTokenUtil;
@@ -33,16 +33,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         System.out.println("🔍 Checking authentication token...");
-        String token = extractToken(request);
+        String token = null;
+        try {
+            token = extractToken(request);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         if (token != null) {
             try {
-                System.out.println("🔓 Decrypting token...");
-                System.out.println(token);
-                String decryptedToken = aesUtil.decrypt(token);
-                System.out.println(decryptedToken);
-                if (jwtTokenUtil.validateToken(decryptedToken)) {
-                    String username = jwtTokenUtil.extractUsername(decryptedToken);
+
+                if (jwtTokenUtil.validateToken(token)) {
+                    String username = jwtTokenUtil.extractEmail(token);
                     System.out.println("Valid token for user: " + username);
 
                     UserDetails userDetails = userDetailsService.loadUserByUsername(username);
@@ -61,7 +63,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         chain.doFilter(request, response);
     }
 
-    private String extractToken(HttpServletRequest request) {
+    private String extractToken(HttpServletRequest request) throws Exception {
         String headerToken = request.getHeader("Authorization");
         if (headerToken != null && headerToken.startsWith("Bearer ")) {
             return headerToken.substring(7);
@@ -71,7 +73,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             for (Cookie cookie : request.getCookies()) {
                 if ("jwt".equals(cookie.getName())) {
                     System.out.println(cookie.getName() + cookie.getValue());
-                    return URLDecoder.decode(cookie.getValue(), StandardCharsets.UTF_8);
+                    System.out.println("🔓 Decrypting token...");
+                    return aesUtil.decrypt(URLDecoder.decode(cookie.getValue(), StandardCharsets.UTF_8));
                 }
             }
         }

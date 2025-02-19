@@ -5,16 +5,9 @@ import iconqb from "../../assets/qbox-nofondo.png";
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const list = [
-    { name: "LumberJack", url: "https://tbot.xyz/lumber/" },
-    { name: "Youtube", url: "https://www.youtube.com/@DotDager" },
-    { name: "Github", url: "https://github.com/MarianoVilla" },
     { name: "Instagram", url: "https://www.instagram.com/dager.32/" },
     { name: "Twitter/X", url: "https://twitter.com/Dager_32" },
-    { name: "TikTok", url: "https://www.tiktok.com/@elantrodedager" },
-    {
-      name: "¿Como centrar un div?",
-      url: "https://stackoverflow.com/questions/2281087/center-a-div-in-css",
-    },
+    { name: "TikTok", url: "https://www.tiktok.com/@elantrodedager" }
   ];
 
   const toggleMenu = () => {
@@ -22,7 +15,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="h-[10vh] bg-[#ff440075] flex flex-row justify-between items-center shadow-purple-glow">
+    <nav className="h-[10vh] bg-[#ff440040] flex flex-row justify-between items-center shadow-purple-glow">
       <div
         className={`fixed top-[10vh] left-0 w-screen h-screen bg-black bg-opacity-45 z-10
               ${
@@ -33,17 +26,18 @@ const Navbar: React.FC = () => {
       >
         <button className="w-screen h-screen" onClick={toggleMenu} />
       </div>
-      <div className="mx-10 w-[100%] flex flex-row justify-between items-center">
+      <div className="ml-4 w-[100%] flex flex-row justify-between items-center">
         <div>
           <img src={iconqb} alt="Logo"
           className="w-[20vh]" />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col mr-3">
           <button
             onClick={toggleMenu}
             type="button"
-            className="inline-flex items-center justify-center p-2 w-10 h-10 text-sm text-black rounded-lg shadow-purple-glow hover:shadow-lumberjack-glow transition-transform duration-300
-            hover:cursor-pointer"
+            className="inline-flex items-center justify-center p-2 w-10 h-10 text-sm text-black rounded-lg shadow-qbox 
+            hover:text-qbox hover:shadow-qbox transition-transform duration-300 hover:cursor-pointer
+            bg-qbox hover:bg-black"
           >
             <span className="sr-only">Open main menu</span>
             <svg
@@ -63,7 +57,7 @@ const Navbar: React.FC = () => {
             </svg>
           </button>
           <div
-            className={`absolute z-50 top-[10vh] right-0 w-[100%] bg-display_menu shadow-profile-glow overflow-hidden transition-all duration-300 ${
+            className={`absolute z-50 top-[15vh] right-0 w-[100%] bg-display_menu shadow-profile-glow overflow-hidden transition-all duration-300 ${
               isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
             }`}
           >
