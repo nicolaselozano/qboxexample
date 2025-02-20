@@ -6,16 +6,12 @@ import { MansoryGallery } from "./components/gallery/Mansory";
 import { TiltEffect } from "./components/gallery/TiltCard";
 import Title from "./components/home/ProfileData";
 import { Titles } from "./components/home/Titles";
+import { Horarios } from "./components/horarios/Horarios";
 import Navbar from "./components/navbar/Navbar";
 import { ProgramsOptions } from "./components/programsOptions/ProgramsOptions";
 
 function App() {
   const tailcards = [
-    {
-      title: "Card 1",
-      image: "https://ethic.es/wp-content/uploads/2023/03/imagen.jpg",
-      description: "Description for Card 1.",
-    },
     {
       title: "Card 2",
       image:
@@ -105,6 +101,9 @@ function App() {
             </TiltEffect>
           ))}
         />
+      </div>
+      <div className="m-4">
+        <Horarios/>
       </div>
     </section>
   );

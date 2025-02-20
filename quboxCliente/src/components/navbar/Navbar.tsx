@@ -7,7 +7,7 @@ const Navbar: React.FC = () => {
   const list = [
     { name: "Instagram", url: "https://www.instagram.com/dager.32/" },
     { name: "Twitter/X", url: "https://twitter.com/Dager_32" },
-    { name: "TikTok", url: "https://www.tiktok.com/@elantrodedager" }
+    { name: "TikTok", url: "https://www.tiktok.com/@elantrodedager" },
   ];
 
   const toggleMenu = () => {
@@ -15,7 +15,10 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="h-[10vh] bg-[#ff440040] flex flex-row justify-between items-center shadow-purple-glow">
+    <nav
+      className={`${isOpen ? "fixed w-full z-50" : ""}
+        h-[10vh] bg-[#ff440040] flex flex-row justify-between items-center shadow-purple-glow`}
+    >
       <div
         className={`fixed top-[10vh] left-0 w-screen h-screen bg-black bg-opacity-45 z-10
               ${
@@ -26,12 +29,13 @@ const Navbar: React.FC = () => {
       >
         <button className="w-screen h-screen" onClick={toggleMenu} />
       </div>
-      <div className="ml-4 w-[100%] flex flex-row justify-between items-center">
+      <div
+        className={`ml-4 w-[100%] flex flex-row justify-between items-center`}
+      >
         <div>
-          <img src={iconqb} alt="Logo"
-          className="w-[20vh]" />
+          <img src={iconqb} alt="Logo" className="w-[20vh]" />
         </div>
-        <div className="flex flex-col mr-3">
+        <div className={`flex flex-col mr-3`}>
           <button
             onClick={toggleMenu}
             type="button"
