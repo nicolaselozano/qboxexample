@@ -4,7 +4,11 @@ import { API_WS_DOMAIN } from "../../../vars";
 
 export default function useWebSocket() {
   const [messages, setMessages] = useState<string[]>([]);
-  const [client] = useState(() => new Client({ brokerURL: `${API_WS_DOMAIN}/ws`, reconnectDelay: 20000 }));
+  const [client] = useState(() => new Client({ brokerURL: `${API_WS_DOMAIN}/ws`,
+    connectHeaders: {
+      withCredentials: "true"
+    },
+    reconnectDelay: 20000 }));
 
   useEffect(() => {
     client.onConnect = () => {
