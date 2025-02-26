@@ -5,9 +5,9 @@ import iconqb from "../../assets/qbox-nofondo.png";
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const list = [
-    { name: "Instagram", url: "https://www.instagram.com/dager.32/" },
-    { name: "Twitter/X", url: "https://twitter.com/Dager_32" },
-    { name: "TikTok", url: "https://www.tiktok.com/@elantrodedager" },
+    { name: "Instagram", url: "https://www.instagram.com/qubox_gym/?hl=es" },
+    { name: "Twitter/X", url: "https://www.instagram.com/qubox_gym/?hl=es" },
+    { name: "TikTok", url: "https://www.instagram.com/qubox_gym/?hl=es" },
   ];
 
   const toggleMenu = () => {

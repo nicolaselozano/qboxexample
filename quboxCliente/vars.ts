@@ -1,0 +1,1 @@
+export const API_WS_DOMAIN = import.meta.env.VITE_API_WS_DOMAIN || "https://qbox-api.onrender.com";

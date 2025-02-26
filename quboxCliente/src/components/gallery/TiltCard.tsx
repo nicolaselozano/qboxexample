@@ -12,7 +12,17 @@ function throttle(func, delay) {
   };
 }
 
-export const TiltEffect = ({ className, image, children }) => {
+interface TiltEffectProps {
+  className?: string;
+  image?: string;
+  children?: React.ReactNode;
+}
+
+export const TiltEffect: React.FC<TiltEffectProps> = ({
+  className,
+  image,
+  children,
+}) => {
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
 
   const onMouseMove = useCallback(
@@ -25,8 +35,8 @@ export const TiltEffect = ({ className, image, children }) => {
       const y = e.clientY - box.top;
       const centerX = box.width / 2;
       const centerY = box.height / 2;
-      const rotateX = (y - centerY) / 5;
-      const rotateY = (centerX - x) / 5;
+      const rotateX = (y - centerY) / 20;
+      const rotateY = (centerX - x) / 20;
 
       setRotate({ x: rotateX, y: rotateY });
     }, 100),
@@ -39,22 +49,21 @@ export const TiltEffect = ({ className, image, children }) => {
 
   return (
     <div
-      className={`relative w-full h-auto rounded-xl transition-transform duration-500 will-change-transform ${className}`}
+      className={`relative w-full h-full rounded-xl transition-transform duration-500 will-change-transform ${className}`}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       style={{
         transform: `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
       }}
     >
-      {/* Quitar posición absoluta para evitar que se superponga */}
       {image ? (
         <img
           src={image}
           alt="Card Image"
-          className="w-full h-auto object-cover rounded-xl"
+          className="w-full h-full object-cover rounded-xl"
         />
       ) : (
-        <div className="w-full h-auto flex flex-col items-center justify-center bg-gray-200 p-4 rounded-xl">
+        <div className="w-full h-full flex flex-col items-center justify-center rounded-xl">
           {children}
         </div>
       )}

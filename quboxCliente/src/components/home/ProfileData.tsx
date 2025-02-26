@@ -33,7 +33,7 @@ const Title: React.FC = () => {
           sentences={["Acompañamiento profesional", "Mejora tus habitos"]}
         />
         <p className="text-base font-[Noto_Serif] font-extrabold md:text-lg lg:text-[9vh]">
-          Haz una inversion en Ti
+          Haz una inversión en Ti
         </p>
         <h3 className="text-[3.2vh]">Entrena para vos, entrena para la vida.</h3>
         <div className="flex justify-center md:justify-start mt-16">
