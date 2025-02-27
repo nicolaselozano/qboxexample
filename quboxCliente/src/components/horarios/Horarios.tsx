@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import horariosData from "../../data/horariosData.json";
+import useWebSocket from "../hub/useWebSocket";
 
 const daysOfWeek = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
 
@@ -13,6 +15,21 @@ const formatTime = (timeString) => {
 const hours = Array.from({ length: 12 }, (_, i) => `${9 + i}:00`);
 
 export const Horarios = () => {
+  const [horarios, setHorarios] = useState(horariosData);
+  const { messages } = useWebSocket();
+
+  useEffect(() => {
+    if (messages.length > 0) {
+      try {
+        const nuevoHorario = JSON.parse(messages[messages.length - 1]);
+        console.log("Nuevo horario recibido:", nuevoHorario);
+        setHorarios(nuevoHorario);
+      } catch (error) {
+        console.error("Error al procesar nuevo horario:", error);
+      }
+    }
+  }, [messages]);
+
   return (
     <div className="flex justify-center mt-10 rounded-xl">
       <table
@@ -31,7 +48,7 @@ export const Horarios = () => {
           </tr>
         </thead>
         <tbody>
-          {horariosData.data.slice(1, horariosData.data.length).map((fila) => (
+          {horarios.data.slice(1, horarios.data.length).map((fila) => (
             <tr>
               <td className="p-3 border border-black bg-black text-white font-bold">
                 {formatTime(fila[0] || "")}
