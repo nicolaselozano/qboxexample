@@ -27,7 +27,6 @@ const Title: React.FC = () => {
 
   return (
     <div className="relative flex flex-col md:flex-row justify-center md:justify-between items-center md:items-start w-full p-4 md:p-10">
-      
       <div className="text-center mt-[15vh] md:text-left h-[50vh] md:h-[60vh] md:mb-0">
         <Typewriter
           sentences={["Acompañamiento profesional", "Mejora tus habitos"]}
@@ -35,7 +34,9 @@ const Title: React.FC = () => {
         <p className="text-base font-[Noto_Serif] font-extrabold md:text-lg lg:text-[9vh]">
           Haz una inversión en Ti
         </p>
-        <h3 className="text-[3.2vh]">Entrena para vos, entrena para la vida.</h3>
+        <h3 className="text-[3.2vh]">
+          Entrena para vos, entrena para la vida.
+        </h3>
         <div className="flex justify-center md:justify-start mt-16">
           <ButtonHome classname="border-black w-[20vh] md:w-[25vh] shadow-purple-glow">
             <a onClick={handleScroll}>
@@ -49,10 +50,11 @@ const Title: React.FC = () => {
           </ButtonHome>
         </div>
       </div>
-      <div className="relative w-[40vh] h-[40vh]
-      md:w-[50vh] md:h-[50vh] lg:w-[210vh] lg:h-[100vh] shadow-profile-glow overflow-hidden
-      transform-flat">
-          <img
+      <div
+        className="relative w-[40vh] h-[40vh] md:w-[50vh] md:h-[50vh] lg:w-[210vh] lg:h-[100vh] 
+  shadow-profile-glow overflow-hidden transform-flat sm:hidden md:block"
+      >
+        <img
           src={profilePFP}
           alt="Card Image"
           className="absolute inset-0 object-contain w-full h-full rounded-xl"
