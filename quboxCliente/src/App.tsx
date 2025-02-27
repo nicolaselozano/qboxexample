@@ -74,18 +74,24 @@ function App() {
         <BackgroundBox />
         <Navbar />
         <Title />
-        <Titles/>
+        <Titles />
       </div>
       <div className="mt-[20vh]">
-        <AboutUs/>
+        <AboutUs />
       </div>
-      <div className="mt-[20vh] w-full flex flex-col justify-center items-center">
-      <h1 className="text-[7vh] font-bold text-qbox">Lo que ofrecemos</h1>
-      <p className="text-[3vh]">Elije el programa que mas se adapte a tu objetivo</p>
-        <ProgramsOptions/>
+      <div className="mt-10 md:mt-[15vh] lg:mt-[20vh] w-full flex flex-col justify-center items-center text-center px-4">
+        <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-qbox">
+          Lo que ofrecemos
+        </h1>
+        <p className="text-lg md:text-2xl lg:text-3xl mt-2">
+          Elige el programa que más se adapte a tu objetivo
+        </p>
+        <ProgramsOptions />
       </div>
-      <div className="w-[150vh] mx-auto flex flex-col justify-center items-center">
-      <h3 className="text-[#ff4200] text-lg font-bold uppercase mb-10">Galeria</h3>
+      <div className="w-[40vh] md:w-full md:max-w-[1200px] mx-auto flex flex-col justify-center items-center px-4">
+        <h3 className="text-qbox text-lg font-bold uppercase mb-10 md:mb-6">
+          Galería
+        </h3>
         <MasonryGallery
           tailcards={tailcards.map((card, index) => (
             <TiltEffect
@@ -102,11 +108,12 @@ function App() {
           ))}
         />
       </div>
+
       <div className="m-4">
-        <Horarios/>
+        <Horarios />
       </div>
       <div className="mt-[10vh]">
-        <Footer/>
+        <Footer />
       </div>
     </section>
   );

@@ -46,9 +46,9 @@ export const ProgramsOptions = () => {
   ];
 
   return (
-    <section className="grid grid-cols-3 gap-3 m-[10vh]">
+    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-4 md:m-6 lg:m-[10vh]">
       {optionList.map((option, index) => (
-        <div key={index} className="relative m-3 w-[60vh] h-[35vh]">
+        <div key={index} className="relative w-full max-w-[60vh] h-auto mx-auto">
           <span className="absolute top-0 -right-5 h-4 w-4 animate-ping rounded-full bg-qbox opacity-75"></span>
           <POCard
             title={option.title}
@@ -59,4 +59,5 @@ export const ProgramsOptions = () => {
       ))}
     </section>
   );
+  
 };
