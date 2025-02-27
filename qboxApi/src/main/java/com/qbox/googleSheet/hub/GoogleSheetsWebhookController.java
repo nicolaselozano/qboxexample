@@ -1,12 +1,18 @@
 package com.qbox.googleSheet.hub;
 
+import com.qbox.googleSheet.config.AppConfig;
+import com.qbox.googleSheet.service.GoogleSheetService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -15,6 +21,8 @@ import java.util.Map;
 public class GoogleSheetsWebhookController {
 
     private final SimpMessagingTemplate messagingTemplate;
+    private final GoogleSheetService googleSheetService;
+    private final AppConfig appConfig;
 
     @PostMapping
     public ResponseEntity<Map<String, Object>> handleGoogleSheetsUpdate(@RequestBody Map<String, Object> payload) {
@@ -29,4 +37,23 @@ public class GoogleSheetsWebhookController {
     public String sendMessage(String message) {
         return "Mensaje recibido: " + message;
     }
+
+    @SubscribeMapping("/topic/updates")
+    public List<List<Object>> sendLastDataOnSubscribe() throws IOException, GeneralSecurityException {
+        System.out.println("suscribiendo y tomando datos del spreadsheet");
+        String spreadsheetId = appConfig.getProperty("SPREADSHEETID");
+        String range = appConfig.getProperty("RANGE");
+        return googleSheetService.getSheetData(spreadsheetId, range);
+    }
+
+    @MessageMapping("/requestLatestData")
+    public void sendLatestDataOnRequest() throws IOException, GeneralSecurityException {
+        System.out.println("Cliente solicitó los últimos datos del spreadsheet");
+        String spreadsheetId = appConfig.getProperty("SPREADSHEETID");
+        String range = appConfig.getProperty("RANGE");
+        List<List<Object>> data = googleSheetService.getSheetData(spreadsheetId, range);
+
+        messagingTemplate.convertAndSend("/topic/updates", data);
+    }
+
 }

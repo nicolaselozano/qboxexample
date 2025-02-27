@@ -7,15 +7,13 @@ const daysOfWeek = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
 const formatTime = (timeString) => {
   if (!timeString) return "";
   const date = new Date(timeString);
-  let hours = date.getHours();
+  const hours = date.getHours();
 
   return `${hours}:00`;
 };
 
-const hours = Array.from({ length: 12 }, (_, i) => `${9 + i}:00`);
-
 export const Horarios = () => {
-  const [horarios, setHorarios] = useState(horariosData);
+  const [horarios, setHorarios] = useState({data:horariosData.data});
   const { messages } = useWebSocket();
 
   useEffect(() => {
@@ -23,7 +21,7 @@ export const Horarios = () => {
       try {
         const nuevoHorario = JSON.parse(messages[messages.length - 1]);
         console.log("Nuevo horario recibido:", nuevoHorario);
-        setHorarios(nuevoHorario);
+        setHorarios({data:nuevoHorario});
       } catch (error) {
         console.error("Error al procesar nuevo horario:", error);
       }

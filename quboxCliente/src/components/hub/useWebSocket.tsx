@@ -10,24 +10,28 @@ export default function useWebSocket() {
     },
     reconnectDelay: 20000 }));
 
-  useEffect(() => {
-    client.onConnect = () => {
-      console.log("Conectado al WebSocket");
-      client.subscribe("/topic/updates", (message) => {
-        console.log("actualizando", message.body);
-        setMessages((prev) => [...prev, message.body]);
-      });
-    };
-
-    client.onDisconnect = () => console.log("Desconectado del WebSocket");
-    client.onStompError = (frame) => console.error("Error STOMP:", frame);
-
-    client.activate();
-
-    return () => {
-      client.deactivate();
-    };
-  }, [client]);
+    useEffect(() => {
+      client.onConnect = () => {
+        console.log("Conectado al WebSocket");
+    
+        client.publish({ destination: "/app/requestLatestData" });
+    
+        client.subscribe("/topic/updates", (message) => {
+          console.log("actualizando", message.body);
+          setMessages((prev) => [...prev, message.body]);
+        });
+      };
+    
+      client.onDisconnect = () => console.log("Desconectado del WebSocket");
+      client.onStompError = (frame) => console.error("Error STOMP:", frame);
+    
+      client.activate();
+    
+      return () => {
+        client.deactivate();
+      };
+    }, [client]);
+    
 
   return { messages, client };
 }

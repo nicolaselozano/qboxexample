@@ -32,8 +32,8 @@ public class GoogleSheetController {
 
             String decryptedToken = URLDecoder.decode(aesUtil.decrypt(jwtCookie), StandardCharsets.UTF_8);
             String googleToken = jwtTokenUtil.extractStringClaim(decryptedToken,"access_token");
-            messagingTemplate.convertAndSend("/topic/updates", googleSheetsService.getSheetData(spreadsheetId, range, googleToken));
-            return googleSheetsService.getSheetData(spreadsheetId, range, googleToken);
+            messagingTemplate.convertAndSend("/topic/updates", googleSheetsService.getSheetData(spreadsheetId, range));
+            return googleSheetsService.getSheetData(spreadsheetId, range);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
