@@ -1,5 +1,6 @@
 import { AboutUs } from "./components/aboutUs/AboutUs";
 import { BackgroundBox } from "./components/background/BackgroundBox";
+import { Footer } from "./components/footer/Footer";
 import { MasonryGallery } from "./components/gallery/Mansory";
 import { TiltEffect } from "./components/gallery/TiltCard";
 import Title from "./components/home/ProfileData";
@@ -74,7 +75,6 @@ function App() {
         <Navbar />
         <Title />
         <Titles/>
-        <HubHorarios/>
       </div>
       <div className="mt-[20vh]">
         <AboutUs/>
@@ -104,6 +104,9 @@ function App() {
       </div>
       <div className="m-4">
         <Horarios/>
+      </div>
+      <div className="mt-[10vh]">
+        <Footer/>
       </div>
     </section>
   );

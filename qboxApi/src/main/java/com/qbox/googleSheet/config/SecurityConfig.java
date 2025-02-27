@@ -48,7 +48,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http,JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -56,11 +56,12 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/v*/registration/**",
                                 "/actuator/**",
-                                "/oauth2/**",
-                                "/auth/register",
-                                "/auth/login",
-                                "/api/**",
-                                "/ws-update"
+                                "/oauth2/exchange",
+                                "/oauth2/success",
+                                "/oauth2/develop",
+                                "/ws-update",
+                                "/ws/**",
+                                "/topic/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
@@ -82,14 +83,16 @@ public class SecurityConfig {
 
             DefaultOAuth2User oauthUser = (DefaultOAuth2User) authentication.getPrincipal();
             String email = oauthUser.getAttribute("email");
+            String name = oauthUser.getAttribute("name");
+
             OAuth2AuthenticationToken authToken = (OAuth2AuthenticationToken) authentication;
             OAuth2AuthorizedClient authorizedClient = authorizedClientService.loadAuthorizedClient(
                     authToken.getAuthorizedClientRegistrationId(),
                     authToken.getName()
             );
 
-            if (email == null) {
-                throw new IllegalArgumentException("Email is null in OAuth2 response");
+            if (email == null || name == null) {
+                throw new IllegalArgumentException("Email or Name is null in OAuth2 response");
             }
 
             if (authorizedClient == null || authorizedClient.getAccessToken() == null) {
@@ -101,11 +104,20 @@ public class SecurityConfig {
             String jwt = jwtUtil.generateToken(email, googleAccessToken);
 
             String encryptedToken = URLEncoder.encode(aesUtil.encrypt(jwt), StandardCharsets.UTF_8);
+            String encryptedEmail = URLEncoder.encode(aesUtil.encrypt(email), StandardCharsets.UTF_8);
+            String encryptedName = URLEncoder.encode(aesUtil.encrypt(name), StandardCharsets.UTF_8);
 
             response.setHeader(HttpHeaders.SET_COOKIE, CreateCookie.auth(encryptedToken).toString());
-            System.out.println("✅ JWT stored in cookie");
+            response.addHeader(HttpHeaders.SET_COOKIE, CreateCookie.cookie("email", encryptedEmail).toString());
+            response.addHeader(HttpHeaders.SET_COOKIE, CreateCookie.cookie("username", encryptedName).toString());
 
-            response.sendRedirect("/oauth2/success?token=" + encryptedToken);
+            System.out.println("✅ JWT, Email y Nombre almacenados en cookies");
+
+            boolean isDevelop = appConfig.getProperty("ENVIRONMENT").equalsIgnoreCase("develop");
+
+            String redirectUrl = isDevelop ? "/oauth2/success" : "/oauth2/success";
+            System.out.println(redirectUrl);
+            response.sendRedirect(redirectUrl.trim() + "?token=" + encryptedToken + "&email=" + encryptedEmail + "&name=" + encryptedName);
 
         } catch (Exception e) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Authentication failed: " + e.getMessage());

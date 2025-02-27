@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useWebSocket from "./useWebSocket";
 
 export function HubHorarios() {
-  const { messages, client } = useWebSocket(); // ✅ Ahora obtenemos el cliente
+  const { messages, client } = useWebSocket();
   const [message, setMessage] = useState("");
 
   const sendMessage = () => {

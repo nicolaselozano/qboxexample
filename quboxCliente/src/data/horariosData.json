@@ -1,0 +1,127 @@
+{
+    "sheetName": "Hoja 1",
+    "range": "A1:H12",
+    "data": [
+      [
+        "Hora",
+        "Lunes",
+        "Martes",
+        "Miércoles",
+        "Jueves",
+        "Viernes",
+        "Sábado",
+        "Domingo"
+      ],
+      [
+        "1899-12-30T13:16:48.000Z",
+        "Musculación y Spinning",
+        "Spinning",
+        "Musculación",
+        "Spinning",
+        "Musculación y Spinning",
+        null,
+        null
+      ],
+      [
+        "1899-12-30T14:16:48.000Z",
+        "Spinning",
+        "Musculacion",
+        "Cardio y Abs",
+        "Musculación y Spinning",
+        "Spinning",
+        null,
+        null
+      ],
+      [
+        "1899-12-30T15:16:48.000Z",
+        "Spinning",
+        "Musculación y Spinning",
+        "HIIT",
+        "Musculación",
+        "Cardio y Abs",
+        null,
+        null
+      ],
+      [
+        "1899-12-30T16:16:48.000Z",
+        "HIIT",
+        "Cardio y Abs",
+        "Musculación",
+        "Spinning",
+        "HIIT",
+        null,
+        null
+      ],
+      [
+        "1899-12-30T17:16:48.000Z",
+        "Cardio y Abs",
+        "Musculación",
+        "Musculación",
+        "HIIT",
+        "Musculación",
+        null,
+        null
+      ],
+      [
+        "1899-12-30T18:16:48.000Z",
+        "Musculación",
+        "HIIT",
+        "Spinning",
+        "Cardio y Abs",
+        "Musculación y Spinning",
+        null,
+        null
+      ],
+      [
+        "1899-12-30T19:16:48.000Z",
+        "Spinning",
+        "Cardio y Abs",
+        "HIIT",
+        "Musculación",
+        "Spinning",
+        null,
+        null
+      ],
+      [
+        "1899-12-30T20:16:48.000Z",
+        "Musculación",
+        "Spinning",
+        "Musculación y Spinning",
+        "HIIT",
+        "Cardio y Abs",
+        null,
+        null
+      ],
+      [
+        "1899-12-30T21:16:48.000Z",
+        "HIIT",
+        "Musculación",
+        "Cardio y Abs",
+        "Musculación y Spinning",
+        "Spinning",
+        null,
+        null
+      ],
+      [
+        "1899-12-30T22:16:48.000Z",
+        "Cardio y Abs",
+        "Spinning",
+        "HIIT",
+        "Musculación",
+        "Musculación y Spinning",
+        null,
+        null
+      ],
+      [
+        "1899-12-30T23:16:48.000Z",
+        "Musculación y Spinning",
+        "HIIT",
+        "Spinning",
+        "Cardio y Abs",
+        "Musculación",
+        null,
+        null
+      ]
+    ],
+    "timestamp": 1740593778604
+  }

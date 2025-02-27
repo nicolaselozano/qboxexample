@@ -56,10 +56,13 @@ dependencies {
 	implementation 'org.springframework.security:spring-security-oauth2-resource-server:6.4.2'
 
 //	websocket
-	implementation 'org.springframework.boot:spring-boot-starter-websocket:3.4.2'
-	implementation 'org.springframework:spring-websocket:7.0.0-M2'
-
 	implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'
 	implementation 'org.glassfish.expressly:expressly:5.0.0'
+
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.webjars:stomp-websocket:2.3.4'
+	implementation 'org.springframework:spring-messaging'
+
 }
 

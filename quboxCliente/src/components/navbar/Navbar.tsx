@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
         h-[10vh] bg-[#ff440040] flex flex-row justify-between items-center shadow-purple-glow`}
     >
       <div
-        className={`fixed top-[10vh] left-0 w-screen h-screen bg-black bg-opacity-45 z-10
+        className={`fixed top-[10vh] left-0 w-screen h-screen bg-black/95 bg-opacity-45 z-10
               ${
                 isOpen
                   ? "translate-x-0 opacity-100"

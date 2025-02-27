@@ -1,15 +1,15 @@
 package com.qbox.googleSheet.hub;
+
 import org.springframework.stereotype.Component;
-import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Component
-public class SheetWebSocketHandler implements WebSocketHandler {
+public class SheetWebSocketHandler extends TextWebSocketHandler {
     private static final CopyOnWriteArrayList<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
 
     @Override
@@ -19,29 +19,19 @@ public class SheetWebSocketHandler implements WebSocketHandler {
     }
 
     @Override
-    public void handleMessage(WebSocketSession session, org.springframework.web.socket.WebSocketMessage<?> message) throws IOException {
+    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
         System.out.println("Mensaje recibido: " + message.getPayload());
 
         for (WebSocketSession s : sessions) {
             if (s.isOpen()) {
-                s.sendMessage(new TextMessage("Echo: " + message.getPayload()));
+                s.sendMessage(new TextMessage(" Echo: " + message.getPayload()));
             }
         }
     }
 
     @Override
-    public void handleTransportError(WebSocketSession session, Throwable exception) {
-        System.out.println("Error en la conexión: " + exception.getMessage());
-    }
-
-    @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
+    public void afterConnectionClosed(WebSocketSession session, org.springframework.web.socket.CloseStatus status) {
         sessions.remove(session);
-        System.out.println("Cliente desconectado: " + session.getId());
-    }
-
-    @Override
-    public boolean supportsPartialMessages() {
-        return false;
+        System.out.println(" Cliente desconectado: " + session.getId());
     }
 }

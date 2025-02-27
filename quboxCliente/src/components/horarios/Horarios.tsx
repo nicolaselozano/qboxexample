@@ -1,12 +1,15 @@
-const daysOfWeek = [
-  "Lunes",
-  "Martes",
-  "Miércoles",
-  "Jueves",
-  "Viernes",
-  "Sábado",
-  "Domingo",
-];
+import horariosData from "../../data/horariosData.json";
+
+const daysOfWeek = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
+
+const formatTime = (timeString) => {
+  if (!timeString) return "";
+  const date = new Date(timeString);
+  let hours = date.getHours();
+
+  return `${hours}:00`;
+};
+
 const hours = Array.from({ length: 12 }, (_, i) => `${9 + i}:00`);
 
 export const Horarios = () => {
@@ -28,16 +31,15 @@ export const Horarios = () => {
           </tr>
         </thead>
         <tbody>
-          {hours.map((hour) => (
-            <tr key={hour} className="">
+          {horariosData.data.slice(1, horariosData.data.length).map((fila) => (
+            <tr>
               <td className="p-3 border border-black bg-black text-white font-bold">
-                {hour}
+                {formatTime(fila[0] || "")}
               </td>
-              {daysOfWeek.map((day) => (
-                <td
-                  key={`${day}-${hour}`}
-                  className="p-3 border border-black bg-[#ffffff6d] hover:bg-qbox hover:text-white cursor-pointer transition"
-                ></td>
+              {fila.slice(1, daysOfWeek.length+1).map((value) => (
+                <td className="p-3 border border-black bg-[#ffffff6d] hover:bg-qbox hover:text-white cursor-pointer transition">
+                  {value}
+                </td>
               ))}
             </tr>
           ))}

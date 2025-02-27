@@ -13,5 +13,6 @@ public class Test {
     public ResponseEntity<String> testEndpoint() {
         return ResponseEntity.ok("¡La API está funcionando!");
     }
+
 }
 
