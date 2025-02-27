@@ -1,16 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import profilePFP from "../../assets/pngwing.com.png";
 import ButtonHome from "../button/ButtonHome";
 import Typewriter from "./TypeWriter";
-import { TiltEffect } from "../gallery/TiltCard";
 
 const Title: React.FC = () => {
-  const [hovered, setHovered] = useState(false);
-
-  const toggleHovered = (set: boolean) => {
-    setHovered(set);
-  };
-
   const handleScroll = () => {
     const section = document.getElementById("aboutUs");
     if (section) {
@@ -51,15 +44,16 @@ const Title: React.FC = () => {
         </div>
       </div>
       <div
-        className="relative w-[40vh] h-[40vh] md:w-[50vh] md:h-[50vh] lg:w-[210vh] lg:h-[100vh] 
-  shadow-profile-glow overflow-hidden transform-flat sm:hidden md:block"
-      >
-        <img
-          src={profilePFP}
-          alt="Card Image"
-          className="absolute inset-0 object-contain w-full h-full rounded-xl"
-        />
-      </div>
+  className="relative w-[40vh] h-[40vh] md:w-[50vh] md:h-[50vh] lg:w-[210vh] lg:h-[100vh] 
+  shadow-profile-glow overflow-hidden transform-flat hidden sm:block"
+>
+  <img
+    src={profilePFP}
+    alt="Card Image"
+    className="absolute inset-0 object-contain w-full h-full rounded-xl"
+  />
+</div>
+
     </div>
   );
 };
