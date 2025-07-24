@@ -3,6 +3,7 @@ package com.qbox.googleSheet.hub;
 import com.qbox.googleSheet.config.AppConfig;
 import com.qbox.googleSheet.service.GoogleSheetService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -15,6 +16,7 @@ import java.security.GeneralSecurityException;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @RestController
 @AllArgsConstructor
 @RequestMapping("/ws-update")
@@ -28,6 +30,7 @@ public class GoogleSheetsWebhookController {
     public ResponseEntity<Map<String, Object>> handleGoogleSheetsUpdate(@RequestBody Map<String, Object> payload) {
         System.out.println("Datos recibidos desde Google Sheets: " + payload);
         Object data = payload.get("data");
+        log.info("Mandando datos al cliente");
         messagingTemplate.convertAndSend("/topic/updates", data);
         return ResponseEntity.ok(Map.of("data", data));
     }
@@ -40,7 +43,7 @@ public class GoogleSheetsWebhookController {
 
     @SubscribeMapping("/topic/updates")
     public List<List<Object>> sendLastDataOnSubscribe() throws IOException, GeneralSecurityException {
-        System.out.println("suscribiendo y tomando datos del spreadsheet");
+        log.info("suscribiendo y tomando datos del spreadsheet");
         String spreadsheetId = appConfig.getProperty("SPREADSHEETID");
         String range = appConfig.getProperty("RANGE");
         return googleSheetService.getSheetData(spreadsheetId, range);

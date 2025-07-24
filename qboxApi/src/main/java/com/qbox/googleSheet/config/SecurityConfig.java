@@ -56,20 +56,11 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/v*/registration/**",
                                 "/actuator/**",
-                                "/oauth2/exchange",
-                                "/oauth2/success",
-                                "/oauth2/develop",
                                 "/ws-update",
                                 "/ws/**",
                                 "/topic/**"
                         ).permitAll()
                         .anyRequest().authenticated()
-                )
-                .oauth2Login(oauth2 -> oauth2
-                        .authorizationEndpoint(auth -> auth.baseUri("/oauth2/authorize"))
-                        .redirectionEndpoint(redis -> redis.baseUri("/oauth2/callback/*"))
-                        .successHandler(this::handleOAuth2Success)
-                        .failureHandler(this::handleOAuth2Failure)
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
