@@ -6,7 +6,6 @@ import { TiltEffect } from "./components/gallery/TiltCard";
 import Title from "./components/home/ProfileData";
 import { Titles } from "./components/home/Titles";
 import { Horarios } from "./components/horarios/Horarios";
-import { HubHorarios } from "./components/hub/HubHorarios";
 import Navbar from "./components/navbar/Navbar";
 import { ProgramsOptions } from "./components/programsOptions/ProgramsOptions";
 

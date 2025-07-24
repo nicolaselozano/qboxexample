@@ -6,7 +6,7 @@ export const ProgramsOptions = () => {
       title: "Musculación",
       description: "Entrenamiento con pesas para ganar fuerza y masa muscular.",
       image:
-        "https://doblefit.com/wp-content/uploads/2023/10/Banco-musculacion-ajustable-Doblefit.jpg",
+        "https://farmazara.es/blog/wp-content/uploads/2023/07/gente-haciendo-ciclismo-indoor.jpg",
     },
     {
       title: "Spinning",
