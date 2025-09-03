@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import horariosData from "../../data/horariosData.json";
 import useWebSocket from "../hub/useWebSocket";
+import useGoogleSheet from "../../services/getSheetData";
 
 const daysOfWeek = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
 
@@ -16,6 +17,13 @@ const formatTime = (timeString) => {
 export const Horarios = () => {
   const [horarios, setHorarios] = useState({ data: horariosData.data });
   const { messages } = useWebSocket();
+  const { data } = useGoogleSheet(); 
+
+  useEffect(() => {
+    if (data) {
+      setHorarios({ data });
+    }
+  }, [data]);
 
   useEffect(() => {
     if (messages.length > 0) {
