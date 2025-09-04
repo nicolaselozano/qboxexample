@@ -5,12 +5,14 @@ import useGoogleSheet from "../../services/getSheetData";
 
 const daysOfWeek = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
 
-const formatTime = (timeString) => {
+const formatTime = (timeString) => {  
   if (!timeString) return "";
   const date = new Date(timeString);
+  if(isNaN(date.getHours())) return timeString;
   const hours = date.getHours();
   const minutes = date.getMinutes().toString().padStart(2, "0");
-
+  console.log(date,timeString);
+  
   return `${hours}:${minutes}`;
 };
 
