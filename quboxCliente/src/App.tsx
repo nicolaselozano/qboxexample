@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { AboutUs } from "./components/aboutUs/AboutUs";
 import { BackgroundBox } from "./components/background/BackgroundBox";
 import { Footer } from "./components/footer/Footer";
@@ -52,20 +53,21 @@ function App() {
       image:
         "https://img.freepik.com/foto-gratis/atleta-haciendo-flexiones-gimnasio-estilo-vida-deportivo-torso-desnudo_169016-60920.jpg",
       description: "A cut image.",
-    },
-    {
-      title: "Card 3",
-      image:
-        "https://www.fitactiva.com/wp-content/uploads/2022/11/dias-entrenar.png",
-      description: "A cute  image.",
-    },
-    {
-      title: "Card 4",
-      image:
-        "https://i.pinimg.com/236x/37/66/e6/3766e6d63556c2c339706f0a4f9d8dd4.jpg",
-      description: "A cut image.",
-    },
+    }
   ];
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    setIsMobile(mediaQuery.matches);
+
+    const handleResize = (e) => setIsMobile(e.matches);
+    mediaQuery.addEventListener("change", handleResize);
+
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
+
+  const filteredCards = isMobile ? tailcards.slice(0, 2) : tailcards;
 
   return (
     <section className="flex flex-col justify-between">
@@ -92,7 +94,7 @@ function App() {
           Galería
         </h3>
         <MasonryGallery
-          tailcards={tailcards.map((card, index) => (
+          tailcards={filteredCards.map((card, index) => (
             <TiltEffect
               image={card.image}
               key={index}
