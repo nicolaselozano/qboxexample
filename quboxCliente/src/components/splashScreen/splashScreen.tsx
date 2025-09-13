@@ -1,5 +1,5 @@
 import React from "react";
-import logoQbox from "../../assets/qboxLogo.png";
+import logoQbox from "../../assets/qboxLogo_1.webp";
 
 const SplashScreen: React.FC = () => {
   return (
