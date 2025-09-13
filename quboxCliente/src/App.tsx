@@ -9,6 +9,7 @@ import { Titles } from "./components/home/Titles";
 import { Horarios } from "./components/horarios/Horarios";
 import Navbar from "./components/navbar/Navbar";
 import { ProgramsOptions } from "./components/programsOptions/ProgramsOptions";
+import SplashScreen from "./components/splashScreen/splashScreen";
 
 function App() {
   const tailcards = [
@@ -57,6 +58,8 @@ function App() {
   ];
 
   const [isMobile, setIsMobile] = useState(false);
+   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 768px)");
     setIsMobile(mediaQuery.matches);
@@ -67,7 +70,19 @@ function App() {
     return () => mediaQuery.removeEventListener("change", handleResize);
   }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+
   const filteredCards = isMobile ? tailcards.slice(0, 2) : tailcards;
+
+  if(loading){
+    return <SplashScreen/>
+  }
 
   return (
     <section className="flex flex-col justify-between">
