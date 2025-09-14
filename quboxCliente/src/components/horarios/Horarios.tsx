@@ -11,7 +11,6 @@ const formatTime = (timeString) => {
   if(isNaN(date.getHours())) return timeString;
   const hours = date.getHours();
   const minutes = date.getMinutes().toString().padStart(2, "0");
-  console.log(date,timeString);
   
   return `${hours}:${minutes}`;
 };
@@ -31,7 +30,6 @@ export const Horarios = () => {
     if (messages.length > 0) {
       try {
         const nuevoHorario = JSON.parse(messages[messages.length - 1]);
-        console.log("Nuevo horario recibido:", nuevoHorario);
         setHorarios({ data: nuevoHorario });
       } catch (error) {
         console.error("Error al procesar nuevo horario:", error);

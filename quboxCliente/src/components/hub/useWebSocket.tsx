@@ -12,17 +12,15 @@ export default function useWebSocket() {
 
     useEffect(() => {
       client.onConnect = () => {
-        console.log("Conectado al WebSocket");
     
         client.publish({ destination: "/app/requestLatestData" });
     
         client.subscribe("/topic/updates", (message) => {
-          console.log("actualizando", message.body);
           setMessages((prev) => [...prev, message.body]);
         });
       };
     
-      client.onDisconnect = () => console.log("Desconectado del WebSocket");
+      client.onDisconnect = () => null;
       client.onStompError = (frame) => console.error("Error STOMP:", frame);
     
       client.activate();
