@@ -58,7 +58,8 @@ public class SecurityConfig {
                                 "/actuator/**",
                                 "/ws-update",
                                 "/ws/**",
-                                "/topic/**"
+                                "/topic/**",
+                                "/api/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

@@ -64,5 +64,6 @@ dependencies {
 	implementation 'org.webjars:stomp-websocket:2.3.4'
 	implementation 'org.springframework:spring-messaging'
 
+	implementation 'com.bucket4j:bucket4j-core:8.7.0'
 }
 
