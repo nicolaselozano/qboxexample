@@ -49,6 +49,7 @@ const Title: React.FC = () => {
 >
   <img
     src={profilePFP}
+    rel="preload"
     alt="Card Image"
     className="absolute inset-0 object-contain w-full h-full rounded-xl"
   />

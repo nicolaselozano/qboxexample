@@ -9,7 +9,7 @@ import { Titles } from "./components/home/Titles";
 import { Horarios } from "./components/horarios/Horarios";
 import Navbar from "./components/navbar/Navbar";
 import { ProgramsOptions } from "./components/programsOptions/ProgramsOptions";
-import SplashScreen from "./components/splashScreen/splashScreen";
+import SplashScreen from "./components/splashScreen/SplashScreen";
 
 function App() {
   const tailcards = [
@@ -54,39 +54,47 @@ function App() {
       image:
         "https://img.freepik.com/foto-gratis/atleta-haciendo-flexiones-gimnasio-estilo-vida-deportivo-torso-desnudo_169016-60920.jpg",
       description: "A cut image.",
-    }
+    },
   ];
 
   const [isMobile, setIsMobile] = useState(false);
-   const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 768px)");
     setIsMobile(mediaQuery.matches);
 
-    const handleResize = (e) => setIsMobile(e.matches);
+    const handleResize = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     mediaQuery.addEventListener("change", handleResize);
 
     return () => mediaQuery.removeEventListener("change", handleResize);
   }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
+    async function loadInitialData() {
+      try {
+        // Ejemplo: simulamos fetch con delay
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        // Aquí podrías hacer fetch real: await fetch("/api/data").then(res => res.json());
+      } catch (err) {
+        console.error("Error al cargar datos iniciales", err);
+      } finally {
+        setLoading(false);
+      }
+    }
 
+    loadInitialData();
+  }, []);
 
   const filteredCards = isMobile ? tailcards.slice(0, 2) : tailcards;
 
-  if(loading){
-    return <SplashScreen/>
+  if (loading) {
+    return <SplashScreen />;
   }
 
   return (
     <section className="flex flex-col justify-between">
-      <div>
+      <div rel="preload">
         <BackgroundBox />
         <Navbar />
         <Title />
@@ -124,7 +132,6 @@ function App() {
           ))}
         />
       </div>
-
       <div className="m-4">
         <Horarios />
       </div>
