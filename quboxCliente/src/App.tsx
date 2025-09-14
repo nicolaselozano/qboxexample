@@ -9,7 +9,7 @@ import { Titles } from "./components/home/Titles";
 import { Horarios } from "./components/horarios/Horarios";
 import Navbar from "./components/navbar/Navbar";
 import { ProgramsOptions } from "./components/programsOptions/ProgramsOptions";
-import SplashScreen from "./components/splashScreen/SplashScreen";
+import SplashScreen from "./components/splashScreen/splashScreen";
 
 function App() {
   const tailcards = [
@@ -73,9 +73,7 @@ function App() {
   useEffect(() => {
     async function loadInitialData() {
       try {
-        // Ejemplo: simulamos fetch con delay
         await new Promise((resolve) => setTimeout(resolve, 2000));
-        // Aquí podrías hacer fetch real: await fetch("/api/data").then(res => res.json());
       } catch (err) {
         console.error("Error al cargar datos iniciales", err);
       } finally {
