@@ -8,7 +8,7 @@ import Title from "./components/home/ProfileData";
 import { Titles } from "./components/home/Titles";
 import { Horarios } from "./components/horarios/Horarios";
 import Navbar from "./components/navbar/Navbar";
-import { ProgramsOptions } from "./components/programsOptions/programsOptions";
+import { ProgramsOptions } from "./components/programsOptions/programsOptions.tsx";
 import SplashScreen from "./components/splashScreen/splashScreen";
 
 function App() {
