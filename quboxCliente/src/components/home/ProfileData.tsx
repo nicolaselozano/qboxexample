@@ -4,6 +4,9 @@ import ButtonHome from "../button/ButtonHome";
 import Typewriter from "./TypeWriter";
 
 const Title: React.FC = () => {
+
+  const contact = "https://www.instagram.com/qubox_gym/?hl=es"
+
   const handleScroll = () => {
     const section = document.getElementById("aboutUs");
     if (section) {
@@ -37,7 +40,7 @@ const Title: React.FC = () => {
             </a>
           </ButtonHome>
           <ButtonHome classname="border-qbox w-[20vh] md:w-[25vh] ml-4 shadow-purple-glow">
-            <a onClick={handleScrollContact}>
+            <a onClick={handleScrollContact} href={contact} target="_blank">
               <span>Contactanos</span>
             </a>
           </ButtonHome>

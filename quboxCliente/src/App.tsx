@@ -98,7 +98,7 @@ function App() {
         <Title />
         <Titles />
       </div>
-      <div className="mt-[20vh]">
+      <div className="mt-[20vh]" id="aboutUs">
         <AboutUs />
       </div>
       <div className="mt-10 md:mt-[15vh] lg:mt-[20vh] w-full flex flex-col justify-center items-center text-center px-4">
